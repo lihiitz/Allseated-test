@@ -32,6 +32,7 @@ class Element {
             }
         } else {
             if (this.left === 0) {
+                this.leftToRight = true
                 return true
             } else {
                 this.left--
