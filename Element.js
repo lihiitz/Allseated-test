@@ -1,5 +1,5 @@
 class Element {
-    constructor(speed, color, width, height, top, left) {
+    constructor(id, speed, color, width, height, top, left, effect) {
         this.speed = speed
         this.color = color
         this.width = width
@@ -7,38 +7,55 @@ class Element {
         this.top = top
         this.left = left
         this.leftToRight = true
-        this.calculatedRight = this.width + this.left
+        this.effect = effect
+        this.id = id
+        this.touchWall = 0
+        this.reverse = false
+        this.div = null
     }
 
     draw() {
-
+        this.div = document.getElementById(this.id)
     }
 
     getShape() {
 
     }
 
-    setCalculatedRight(){
-        this.calculatedRight = this.width + this.left
+    getCalculatedRight(){
+        return (this.width + this.left)
+    }
+
+    changeDir(){
+        if (this.reverse){
+            this.touchWall--
+        }else{
+            this.touchWall++
+        }
+        this.div.innerHTML = this.touchWall
+        this.leftToRight = !this.leftToRight
+    }
+
+    doMove(pos){
+        this.left += pos
+        this.div.style.left = this.left + "px";
     }
 
     move() {
         if (this.leftToRight) {
-            if (this.calculatedRight < $(window).width()) {
-                this.left++
-                this.setCalculatedRight()
+            if (this.getCalculatedRight() < $(window).width()) {
+                this.doMove(1)
             } else {
-                this.leftToRight = false
+                this.changeDir()
             }
         } else {
             if (this.left === 0) {
-                this.leftToRight = true
-                return true
+                this.changeDir()
             } else {
-                this.left--
-                this.setCalculatedRight()
+                this.doMove(-1)
             }
         }
-        return false
     }
+    
+
 }

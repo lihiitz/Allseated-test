@@ -1,0 +1,6 @@
+class Effect{
+
+    doEffect(element){
+        
+    }
+}

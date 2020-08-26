@@ -1,12 +1,11 @@
 class Square extends Element {
-    constructor(speed, color, width, height, top, left) {
-        super(speed, color, width, height, top, left)
+    constructor(id, speed, color, width, height, top, left) {
+        super(id, speed, color, width, height, top, left)
     }
 
     draw(){
-        let style = `style="width: ${this.width}px; height: ${this.height}px; top: ${this.top}px; left: ${this.left}px;
-        background: ${this.color};"`
-        return style
+        $(`#container`).append(`<div id="${this.id}" class="${this.getShape()} element" style="width: ${this.width}px; height: ${this.height}px; top: ${this.top}px; left: ${this.left}px; background: ${this.color};"}></div>`)
+        super.draw()
     }
 
     getShape(){
